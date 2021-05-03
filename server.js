@@ -25,10 +25,35 @@ const db = mysql.createConnection(
 );
 
 //return all data in the candidates table
-// err returns an error, rows returns a variable with the response from the SQL server
-db.query(`SELECT * FROM candidates`, (err, rows) => {
-    console.log(rows);
-})
+// // err returns an error, rows returns a variable with the response from the SQL server
+// db.query(`SELECT * FROM candidates WHERE id = 1`, (err, rows) => {
+//     if (err) {
+//         console.log(err);
+//     }
+//     console.log(rows);
+// });
+
+//delete a candidate
+// '?' markes this as a prepared statement, where the question mark is a placeholder and will change based on the query entered
+//db.query('STATEMENT', param, (err, result))
+// db.query(`DELETE FROM candidates WHERE id = ?`, 1, (err, result) => {
+//     if (err) {
+//         console.log(err);
+//     }
+//     console.log(result);
+// })
+
+// Create a candidate
+const sql = `INSERT INTO candidates (id, first_name, last_name, industry_connected)
+            VALUES (?, ?, ?, ?)`;
+const params = [1, 'Ronald', 'Firbank', 1];
+
+db.query(sql, params, (err, result) => {
+    if (err) {
+        console.log(err);
+    }
+    console.log(result);
+});
 
 //handle user requests that are not valid
 //make sure it's the last route so you don't break other routes
