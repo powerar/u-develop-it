@@ -1,3 +1,6 @@
+//import MySQL2
+const mysql = require('mysql2');
+
 // import the Express package
 const express = require('express');
 
@@ -9,6 +12,23 @@ const app = express();
 //add the Express middleware to handle requests
 app.use(express.urlencoded({ extended: false }));
 app.use(express.json());
+
+//Connect to database
+const db = mysql.createConnection(
+    {
+        host: 'localhost',
+        user: 'root',
+        password: 'M9&8z9@#GTYB',
+        database: 'election'
+    },
+    console.log('Connected to the election database.')
+);
+
+//return all data in the candidates table
+// err returns an error, rows returns a variable with the response from the SQL server
+db.query(`SELECT * FROM candidates`, (err, rows) => {
+    console.log(rows);
+})
 
 //handle user requests that are not valid
 //make sure it's the last route so you don't break other routes
