@@ -185,6 +185,7 @@ app.post('/api/candidate', ({ body }, res) => {
 
 //Update a candidate's party
 app.put('/api/candidate/:id', (req, res) => {
+  //forces any PUT request to include a party_id property
   const errors = inputCheck(req.body, 'party_id');
 
   if (errors) {
